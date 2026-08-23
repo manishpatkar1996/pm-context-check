@@ -1,52 +1,93 @@
-# PM context-efficiency rubric
+# PM context-effectiveness rubric
 
-Use these lenses for the inferred portion of the report. Rate each as Strong, Mixed, Weak, or Unknown. Never merge these ratings into the analyzer's numeric score in v0.1.
+Use these lenses for inferred judgments. Rate the pattern, not the person. Do not turn the ratings into a numeric score.
 
-## 1. Brief clarity
+## 1. Brief completeness
 
-Check whether the starting request made the following explicit when relevant:
+Check whether the initial request supplied the relevant parts of a PM brief:
 
-- Desired decision or deliverable
-- Intended audience or user
-- Problem or opportunity
-- Constraints and non-goals
-- Definition of done
+- Goal, decision, or deliverable
+- Audience or user
+- Known facts, evidence, and links
+- Constraints, non-goals, and boundaries
+- Requested output format or level of detail
+- Acceptance checks when correctness or readiness matters
 
-Recommend a one-paragraph canonical brief when multiple clarifying turns were needed.
+Do not require every field for every task. Penalize a missing field only when its later arrival caused ambiguity, clarification, drift, or rework.
 
-## 2. Decision focus
+## 2. Information timing
 
-Check whether the task separated exploration from commitment. Product discovery can be broad; the final decision should identify options, tradeoffs, a recommendation, and unresolved assumptions.
+Compare what was known at the start with what appeared in follow-ups. Distinguish:
 
-Recommend splitting discovery and production only when their combination caused churn, excessive context pressure, or an ambiguous deliverable.
+- Productive iteration: new knowledge emerged through the work.
+- Avoidable late context: the user already knew a requirement but supplied it only after work had to be revised.
+- Deliberate pivot: the goal changed for a stated reason.
 
-## 3. Evidence quality
+A longer opening brief can be efficient when it prevents multiple corrective turns.
 
-Check whether claims were tied to authoritative sources, user evidence, metrics, experiments, or clearly labeled assumptions. More context is not better when its authority or purpose is unclear.
+## 3. Structure and scanability
 
-Recommend a source hierarchy such as: primary evidence, current product facts, constraints, then optional background.
+Check whether instructions separated goal, background, requirements, constraints, and format. Look for a canonical source of truth when the chat becomes long. Repetition is useful when it intentionally restates a decision; it is waste when multiple variants create uncertainty.
 
-## 4. Iteration hygiene
+Recommend a short template, table, or labeled brief only when structure would materially reduce ambiguity.
 
-Check whether follow-ups refined the same goal or repeatedly changed the goal, audience, scope, or format. A deliberate pivot is not waste; unexplained churn is.
+## 4. Clarification burden
 
-Recommend a short decision log after meaningful pivots: decision, reason, implications, and open question.
+Count only user turns whose main purpose was answering or correcting an avoidable ambiguity. Do not penalize clarification that surfaces an unknown tradeoff, seeks consent for an external action, or prevents an unsafe assumption.
 
-## 5. Outcome validation
+Look for a recurring root cause: missing audience, unclear scope, absent source, conflicting constraint, undefined format, or unspoken acceptance check.
 
-Check whether the task ended with evidence that the output was usable: acceptance, a rubric, stakeholder-ready artifact, test, comparison, or explicit next decision.
+## 5. Focus and task continuity
 
-Recommend including two to five acceptance checks in the initial prompt when outcome remains unknown.
+Classify each visible user turn once:
 
-## Recommendation priority
+- `Progress`: advances the same task with needed information or authorization.
+- `Clarification`: answers an ambiguity or fills a missing fact.
+- `Refinement`: improves detail, quality, or presentation without changing the goal.
+- `Pivot`: changes the goal, audience, approach, or delivery channel.
+- `Digression`: introduces an unrelated branch that does not serve the active goal.
+- `Rework`: asks to redo work because earlier context was missing, conflicting, or not preserved.
 
-Choose only one primary recommendation using this order:
+The categories describe trajectory; they are not inherently good or bad.
 
-1. Missing or failed outcome validation
-2. Ambiguous decision or deliverable
-3. Unclear audience, constraints, or non-goals
-4. Unfocused or weak evidence
-5. Avoidable iteration churn
-6. Context pressure or low reuse with no demonstrated value
+Assign the primary intent only. Use this tie-break order: `Rework` when the user asks to redo prior work because context was missing or lost; `Pivot` when the goal or delivery channel changes; `Clarification` when a missing fact is supplied before the affected work; `Refinement` for added detail or presentation quality; `Digression` for an unrelated branch; otherwise `Progress`.
 
-Always preserve a successful behavior before suggesting a change.
+## 6. Context recovery and handoff
+
+After a long chat, pivot, or compaction, check whether the shared state preserved:
+
+- Current objective
+- Decisions already made
+- Unresolved questions
+- Relevant artifacts or sources
+- Next authorized action
+
+Infer degradation only from visible symptoms such as repeated questions, forgotten constraints, contradictions, duplicated work, or a required recap. A compaction event alone is insufficient.
+
+## Systematic-pattern selection
+
+Choose at most two patterns. Prefer one repeated root cause over a list of surface symptoms. Use this priority:
+
+1. Important context repeatedly supplied late
+2. Goal, audience, or scope changed without a clear reset
+3. Required format or depth remained implicit
+4. Facts, assumptions, and preferences were mixed together
+5. Decisions were not carried forward after a long thread or pivot
+6. Unnecessary repetition or unrelated digression consumed attention
+
+For each pattern, state `visible evidence → conversation effect → reusable context practice`. If no systematic issue is supported, say so and preserve the strongest context behavior.
+
+## Better opening brief
+
+Produce a compact, reusable example with only the fields that would have prevented the observed friction:
+
+```text
+Goal / decision:
+Audience:
+What is already known:
+Constraints / non-goals:
+Output shape:
+What to preserve from prior work:
+```
+
+Do not inflate the example with generic boilerplate.
