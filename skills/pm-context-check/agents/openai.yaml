@@ -1,6 +1,6 @@
 interface:
   display_name: "PM Context Check"
-  short_description: "Review PM context efficiency after a Codex task"
-  default_prompt: "Use $pm-context-check to review how efficiently I used context in my previous product-management task."
+  short_description: "Review PM context quality across this Codex chat"
+  default_prompt: "Use $pm-context-check to review my context quality, clarification burden, and conversation focus in this PM chat."
 policy:
   allow_implicit_invocation: false
